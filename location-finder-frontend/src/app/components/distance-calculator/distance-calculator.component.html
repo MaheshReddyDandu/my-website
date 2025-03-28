@@ -1,0 +1,28 @@
+
+<div class="container">
+  <h2 class="heading">Distance Calculator</h2>
+
+  <div class="illustration">
+    <p>Enter two locations to see the distance and route!</p>
+    <p class="example">Example: <span>New York, NY</span> to <span>Los Angeles, CA</span> ≈ 2,790 mi</p>
+  </div>
+
+  <div class="input-group">
+    <input class="form-control custom-input" [(ngModel)]="origin" placeholder="Enter Origin (e.g., New York, NY)">
+    <input class="form-control custom-input" [(ngModel)]="destination" placeholder="Enter Destination (e.g., Los Angeles, CA)">
+    <button class="btn custom-btn" (click)="calculateDistance()" [disabled]="!origin || !destination">
+      Calculate Distance
+    </button>
+  </div>
+
+  <div *ngIf="distanceResult" class="result">
+    <h4 [ngClass]="{'text-success': distanceResult.includes('mi'), 'text-danger': !distanceResult.includes('mi')}">
+      Distance: {{ distanceResult }}
+    </h4>
+  </div>
+
+  <div class="map-section" *ngIf="origin && destination">
+    <h4>Route Map</h4>
+    <div #mapContainer class="map-container"></div>
+  </div>
+</div>

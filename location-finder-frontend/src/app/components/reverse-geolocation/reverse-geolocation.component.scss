@@ -1,0 +1,104 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.heading {
+  color: #28a745; /* Green heading */
+  margin-bottom: 20px;
+}
+
+.illustration {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+  p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .example {
+    font-style: italic;
+    span {
+      font-weight: bold;
+      color: #007bff;
+    }
+  }
+}
+
+.info, .map-info {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.custom-input {
+  padding: 12px;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    outline: none;
+  }
+}
+
+.custom-btn {
+  padding: 12px 20px;
+  background: linear-gradient(45deg, #007bff, #00d4ff);
+  border: none;
+  border-radius: 25px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+  }
+  
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.result {
+  margin-top: 20px;
+  p {
+    font-size: 18px;
+    color: #333;
+    strong {
+      color: #28a745;
+    }
+  }
+}
+
+.map-container {
+  margin-top: 20px;
+  border: 3px solid #007bff;
+  border-radius: 10px;
+  overflow: hidden;
+}
