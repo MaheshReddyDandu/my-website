@@ -16,3 +16,5 @@ jobs:
         echo "$EC2_KEY" > key.pem
         chmod 600 key.pem
         ssh -i key.pem $EC2_USER@$EC2_HOST "bash /var/www/my-website/scripts/deploy.sh"
+
+        
