@@ -18,17 +18,28 @@
     <input type="number" [(ngModel)]="lng" placeholder="📍 Enter Longitude (e.g., -74.0060)" class="custom-input">
   </div>
 
-  <button (click)="getAddress()" class="custom-btn" [disabled]="lat === null || lng === null">Find Location</button>
+  <button (click)="getAddress()" class="button-33" [disabled]="lat === null || lng === null">
+    {{ lat === null || lng === null ? 'Enter Coordinates' : 'Find Location' }}
+  </button>
 
-  <div *ngIf="address || errorMessage" class="result">
-    <p *ngIf="address">🗺️ Address: <strong>{{ address }}</strong></p>
-    <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+  <div *ngIf="isAddressOverlayVisible" class="overlay" (click)="closeAddressOverlay()">
+    <div class="popup-box" (click)="$event.stopPropagation()">
+      <button class="close-icon" (click)="closeAddressOverlay()">✕</button>
+      <h2>Address Lookup</h2>
+      <p *ngIf="address"class="text-success">🗺️ Address: <strong>{{ address }}</strong></p>
+      <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+    </div>
   </div>
 
-  <div class="map-container" *ngIf="lat !== null && lng !== null">
-    <google-map [height]="'400px'" [width]="'100%'" [zoom]="15" [center]="{ lat: lat!, lng: lng! }">
-      <map-marker [position]="{ lat: lat!, lng: lng! }"></map-marker>
-    </google-map>
+  <!-- Google Map -->
+  <div class="map-container" *ngIf="isGoogleMapsLoaded && lat !== null && lng !== null">
+    <google-map *ngIf="lat !== null && lng !== null"
+    [height]="'400px'"
+    [width]="'100%'"
+    [zoom]="15"
+    [center]="{ lat: lat, lng: lng }">
+    <map-marker [position]="{ lat: lat, lng: lng }"></map-marker>
+  </google-map>
   </div>
 
   <p class="map-info">

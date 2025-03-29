@@ -9,15 +9,19 @@
   <div class="input-group">
     <input class="form-control custom-input" [(ngModel)]="origin" placeholder="Enter Origin (e.g., New York, NY)">
     <input class="form-control custom-input" [(ngModel)]="destination" placeholder="Enter Destination (e.g., Los Angeles, CA)">
-    <button class="btn custom-btn" (click)="calculateDistance()" [disabled]="!origin || !destination">
+    <button  class="button-85" (click)="calculateDistance()" [disabled]="!origin || !destination">
       Calculate Distance
     </button>
   </div>
 
-  <div *ngIf="distanceResult" class="result">
-    <h4 [ngClass]="{'text-success': distanceResult.includes('mi'), 'text-danger': !distanceResult.includes('mi')}">
-      Distance: {{ distanceResult }}
-    </h4>
+  <div *ngIf="isOverlayVisible" class="overlay" (click)="closeOverlay()">
+    <div class="popup-box" (click)="$event.stopPropagation()">
+      <button class="close-icon" (click)="closeOverlay()">✕</button>
+      <h2>Distance Result</h2>
+      <p [ngClass]="{'text-success': distanceResult?.includes('mi'), 'text-danger': !distanceResult?.includes('mi')}">
+        {{ distanceResult }}
+      </p>
+    </div>
   </div>
 
   <div class="map-section" *ngIf="origin && destination">
@@ -26,3 +30,5 @@
     <div #mapContainer class="map-container"></div>
   </div>
 </div>
+
+<app-reverse-geolocation></app-reverse-geolocation>

@@ -13,22 +13,32 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+</script>
   <!-- Google Maps with Fallback -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAlegD7rCBx4DILHRAfh7ImMfz2OCf0uc" async defer></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAlegD7rCBx4DILHRAfh7ImMfz2OCf0uc" async defer></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAlegD7rCBx4DILHRAfh7ImMfz2OCf0uc&callback=initMap" async defer></script>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4398502426503370" crossorigin="anonymous"></script>
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Find GPS Coordinates & Distance Calculator",
+      "name": "Find location by GPS Coordinates & Distance Calculator",
       "description": "Search locations by latitude and longitude, convert coordinates to addresses, measure distance, and plan routes with our advanced GPS coordinates tool.",
       "featureList": ["Map View", "Address Lookup", "Route Mapping", "Latitude Longitude Finder", "Coordinates to Address Converter", "Distance Measurement", "Driving Directions", "Navigation Tool"],
       "applicationCategory": "Geolocation Tool",
       "operatingSystem": "Web"
     }
   </script>
+  <script src="main.js" defer></script>
 </head>
 <body>
+  <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-4398502426503370">
+</amp-auto-ads>
   <app-root></app-root>
 </body>
 </html>
