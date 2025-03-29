@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LocationService {
-  private BASE_URL = 'https://findgps-coordinates.com';
+  private BASE_URL = 'https://findgps-coordinates.com/api';
 
   constructor(private http: HttpClient) {}
 
