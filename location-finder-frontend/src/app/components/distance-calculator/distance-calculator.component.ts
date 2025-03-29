@@ -109,24 +109,35 @@ export class DistanceCalculatorComponent implements AfterViewInit {
   closeOverlay() {
     this.isOverlayVisible = false;
   }
-  
   showRoute(): void {
-    if (!this.map) this.initializeMap();
-
-    const request: google.maps.DirectionsRequest = {
-      origin: this.origin,
-      destination: this.destination,
-      travelMode: google.maps.TravelMode.DRIVING,
-    };
-
-    this.directionsService.route(request, (result, status) => {
-      if (status === google.maps.DirectionsStatus.OK && result) {
-        this.directionsRenderer.setDirections(result);
-      } else {
-        console.error('Directions request failed:', status);
-        this.mapLoadError = `Error loading route: ${status}`;
+    if (!this.map) {
+      this.initializeMap();
+    }
+  
+    setTimeout(() => {
+      if (!this.map) {
+        console.error("Map is not initialized properly.");
+        return;
       }
-      this.cdr.detectChanges();
-    });
+  
+      const request: google.maps.DirectionsRequest = {
+        origin: this.origin,
+        destination: this.destination,
+        travelMode: google.maps.TravelMode.DRIVING,
+      };
+  
+      this.directionsService.route(request, (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK && result) {
+          this.directionsRenderer.setMap(this.map || null); // Explicitly set map or null
+          this.directionsRenderer.setDirections(result);
+        } else {
+          console.error('Directions request failed:', status);
+          this.mapLoadError = `Error loading route: ${status}`;
+        }
+        this.cdr.detectChanges();
+      });
+    }, 500);
   }
+  
+  
 }
