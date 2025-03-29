@@ -1,21 +1,21 @@
 name: Deploy
+
 on:
   push:
-    branches: [master]
-    
+    branches: [master]  # Use your branch name
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Deploy to EC2
-      env:
-        EC2_HOST: 35.154.133.178  # Replace with your Elastic IP
-        EC2_USER: ubuntu
-        EC2_KEY: ${{ secrets.EC2_KEY }}
-      run: |
-        echo "$EC2_KEY" > key.pem
-        chmod 600 key.pem
-        ssh -i key.pem $EC2_USER@$EC2_HOST "bash /var/www/my-website/scripts/deploy.sh"
+      - uses: actions/checkout@v3
 
-        
+      - name: Deploy to EC2
+        env:
+          EC2_HOST: 13.126.9.71  # Replace with your EC2 IP
+          EC2_USER: ubuntu
+          EC2_KEY: ${{ secrets.EC2_SSH_KEY }}  # Ensure the secret exists
+        run: |
+          echo "$EC2_KEY" > key.pem
+          chmod 600 key.pem
+          ssh -o StrictHostKeyChecking=no -i key.pem $EC2_USER@$EC2_HOST "bash /home/ubuntu/deploy.sh"
