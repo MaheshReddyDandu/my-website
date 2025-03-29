@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { LocationService } from '../../services/location.service';
 
 @Component({
@@ -15,31 +15,47 @@ export class DistanceCalculatorComponent implements AfterViewInit {
   map: google.maps.Map | undefined;
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
+  mapLoadError: string | null = null;
 
-  constructor(private locationService: LocationService) {}
+  constructor(private locationService: LocationService, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit() {
-    this.initializeMap();
+    this.initializeMapWithRetry();
   }
 
-  initializeMap() {
-    if (!this.mapContainer || !this.mapContainer.nativeElement) {
-      console.error("Map container not found");
+  initializeMapWithRetry(attempts = 3, delay = 1000) {
+    if (typeof google === 'undefined' || !google.maps) {
+      if (attempts > 0) {
+        setTimeout(() => this.initializeMapWithRetry(attempts - 1, delay), delay);
+      } else {
+        this.mapLoadError = 'Failed to load Google Maps. Please check your connection or API key.';
+        this.cdr.detectChanges();
+      }
+      return;
+    }
+
+    if (!this.mapContainer?.nativeElement) {
+      this.mapLoadError = 'Map container not available. Please try again.';
+      this.cdr.detectChanges();
       return;
     }
 
     this.map = new google.maps.Map(this.mapContainer.nativeElement, {
       zoom: 4,
-      center: { lat: 37.0902, lng: -95.7129 } // Center of USA
+      center: { lat: 37.0902, lng: -95.7129 },
+      mapTypeControl: false,
+      streetViewControl: false
     });
     this.directionsRenderer.setMap(this.map);
+    this.mapLoadError = null;
+    this.cdr.detectChanges();
   }
 
   calculateDistance() {
     this.distanceResult = null;
+    this.mapLoadError = null;
     this.locationService.getDistance(this.origin, this.destination).subscribe(
       (data: any) => {
-        console.log('API Response:', data);
         if (data.status === 'OK' && data.rows?.length > 0 && data.rows[0].elements?.length > 0) {
           const element = data.rows[0].elements[0];
           if (element.status === 'OK') {
@@ -51,17 +67,19 @@ export class DistanceCalculatorComponent implements AfterViewInit {
         } else {
           this.distanceResult = `Unable to calculate distance: ${data.status || 'Invalid response'}`;
         }
+        this.cdr.detectChanges();
       },
       (error) => {
-        console.error("Error fetching distance:", error);
-        this.distanceResult = "Error calculating distance.";
+        this.distanceResult = 'Error calculating distance. Please try again.';
+        console.error('Error fetching distance:', error);
+        this.cdr.detectChanges();
       }
     );
   }
 
   showRoute() {
     if (!this.map) {
-      this.initializeMap();
+      this.initializeMapWithRetry();
     }
 
     const request = {
@@ -71,13 +89,13 @@ export class DistanceCalculatorComponent implements AfterViewInit {
     };
 
     this.directionsService.route(request, (result, status) => {
-      console.log('Directions Response:', result, 'Status:', status);
       if (status === google.maps.DirectionsStatus.OK && result) {
         this.directionsRenderer.setDirections(result);
       } else {
-        console.error("Directions request failed:", status);
-        this.distanceResult = `Map failed to load: ${status}`;
+        this.mapLoadError = `Map failed to load route: ${status}`;
+        console.error('Directions request failed:', status);
       }
+      this.cdr.detectChanges();
     });
   }
 }

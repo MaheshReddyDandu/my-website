@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
   { path: 'distance-calculator', component: DistanceCalculatorComponent },
   { path: 'reverse-geolocation', component: ReverseGeolocationComponent },
-  { path: 'location-finder', component: FullcodeComponent },
+  // { path: 'location-finder', component: FullcodeComponent },
   { path: 'home', component: AppComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];

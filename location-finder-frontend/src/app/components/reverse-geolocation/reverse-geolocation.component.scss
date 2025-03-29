@@ -6,7 +6,7 @@
 }
 
 .heading {
-  color: #28a745; /* Green heading */
+  color: #28a745;
   margin-bottom: 20px;
 }
 
@@ -101,4 +101,29 @@
   border: 3px solid #007bff;
   border-radius: 10px;
   overflow: hidden;
+  height: 400px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .input-group {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .custom-input, .custom-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .illustration p, .info, .map-info, .result p {
+    font-size: 14px;
+  }
 }

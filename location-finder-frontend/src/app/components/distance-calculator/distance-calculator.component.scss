@@ -1,12 +1,12 @@
 .container {
   max-width: 800px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
   padding: 20px;
-  text-align: center; /* Center all content */
+  text-align: center;
 }
 
 .heading {
-  color: #28a745; /* Green heading */
+  color: #28a745;
   margin-bottom: 20px;
 }
 
@@ -35,15 +35,15 @@
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between elements */
+  gap: 15px;
   max-width: 500px;
-  margin: 0 auto; /* Center inputs */
+  margin: 0 auto;
 }
 
 .custom-input {
   padding: 12px;
   border: 2px solid #007bff;
-  border-radius: 25px; /* Rounded edges */
+  border-radius: 25px;
   font-size: 16px;
   transition: all 0.3s ease;
   
@@ -56,7 +56,7 @@
 
 .custom-btn {
   padding: 12px 20px;
-  background: linear-gradient(45deg, #007bff, #00d4ff); /* Gradient button */
+  background: linear-gradient(45deg, #007bff, #00d4ff);
   border: none;
   border-radius: 25px;
   color: white;
@@ -77,10 +77,6 @@
     transform: none;
     box-shadow: none;
   }
-}
-
-.loading {
-  margin-top: 20px;
 }
 
 .result {
@@ -109,4 +105,28 @@
   border: 3px solid #007bff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .input-group {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .custom-input, .custom-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .illustration p, .result h4 {
+    font-size: 14px;
+  }
 }

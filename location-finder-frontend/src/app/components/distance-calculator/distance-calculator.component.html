@@ -1,4 +1,3 @@
-
 <div class="container">
   <h2 class="heading">Distance Calculator</h2>
 
@@ -23,6 +22,7 @@
 
   <div class="map-section" *ngIf="origin && destination">
     <h4>Route Map</h4>
+    <div *ngIf="mapLoadError" class="text-danger">{{ mapLoadError }}</div>
     <div #mapContainer class="map-container"></div>
   </div>
 </div>
