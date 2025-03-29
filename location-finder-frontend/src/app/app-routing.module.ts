@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'reverse-geolocation', component: ReverseGeolocationComponent },
   { path: 'location-finder', component: FullcodeComponent },
   { path: 'home', component: AppComponent},
-  { path: '', redirectTo: '/location-finder', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
