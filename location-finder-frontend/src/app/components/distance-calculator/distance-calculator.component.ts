@@ -82,6 +82,11 @@ export class DistanceCalculatorComponent implements AfterViewInit {
   calculateDistance() {
     this.distanceResult = null;
     this.mapLoadError = null;
+    
+    if (!this.map) {
+      this.initializeMap(); // Reinitialize map if it was removed
+    }
+  
     this.locationService.getDistance(this.origin, this.destination).subscribe(
       (data: any) => {
         if (data.status === 'OK' && data.rows?.length > 0 && data.rows[0].elements?.length > 0) {
@@ -89,7 +94,7 @@ export class DistanceCalculatorComponent implements AfterViewInit {
           if (element.status === 'OK') {
             this.distanceResult = element.distance.text;
             this.showRoute();
-            this.isOverlayVisible = true; // Show overlay
+            this.isOverlayVisible = true;
           } else {
             this.distanceResult = `Unable to calculate distance: ${element.status}`;
           }
@@ -105,6 +110,7 @@ export class DistanceCalculatorComponent implements AfterViewInit {
       }
     );
   }
+  
   
   closeOverlay() {
     this.isOverlayVisible = false;
@@ -128,7 +134,7 @@ export class DistanceCalculatorComponent implements AfterViewInit {
   
       this.directionsService.route(request, (result, status) => {
         if (status === google.maps.DirectionsStatus.OK && result) {
-          this.directionsRenderer.setMap(this.map || null); // Explicitly set map or null
+          this.directionsRenderer.setMap(this.map!); // Ensure map is explicitly set
           this.directionsRenderer.setDirections(result);
         } else {
           console.error('Directions request failed:', status);
@@ -138,6 +144,7 @@ export class DistanceCalculatorComponent implements AfterViewInit {
       });
     }, 500);
   }
+  
   
   
 }

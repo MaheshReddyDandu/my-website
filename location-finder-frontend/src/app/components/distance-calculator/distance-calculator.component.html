@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="map-section" *ngIf="origin && destination">
+  <div class="map-section" >
     <h4>Route Map</h4>
     <div *ngIf="mapLoadError" class="text-danger">{{ mapLoadError }}</div>
     <div #mapContainer class="map-container"></div>
