@@ -21,12 +21,16 @@ export class ReverseGeolocationComponent implements OnInit {
     this.loadGoogleMaps();
   }
 
+  // Load Google Maps API script
   loadGoogleMaps() {
     if (this.isGoogleMapsLoaded) return;
 
     if (window['google'] && window['google'].maps) {
       this.isGoogleMapsLoaded = true;
-      this.getAddress();
+      // Only fetch the address once the map is ready and the coordinates are available
+      if (this.lat !== null && this.lng !== null) {
+        this.getAddress();
+      }
       return;
     }
 
@@ -35,13 +39,16 @@ export class ReverseGeolocationComponent implements OnInit {
 
     const script = document.createElement('script');
     script.id = scriptId;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY`; // Replace with your actual API key
     script.async = true;
     script.defer = true;
     script.onload = () => {
       setTimeout(() => {
         this.isGoogleMapsLoaded = true;
-        this.getAddress();
+        // Fetch address only after Google Maps is loaded
+        if (this.lat !== null && this.lng !== null) {
+          this.getAddress();
+        }
         this.cdr.detectChanges();
       }, 500); // 🚀 Non-blocking delay for UI smoothness
     };
@@ -53,6 +60,7 @@ export class ReverseGeolocationComponent implements OnInit {
     document.head.appendChild(script);
   }
 
+  // Fetch the user's current position (geolocation)
   getCurrentPosition() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -74,7 +82,7 @@ export class ReverseGeolocationComponent implements OnInit {
               this.errorMessage = 'Location information is unavailable.';
               break;
             case error.TIMEOUT:
-              this.errorMessage = 'The request to get user location timed out.';
+              this.errorMessage = 'The request to get user location timed out. Please try again.';
               break;
             default:
               this.errorMessage = 'An unknown error occurred.';
@@ -83,7 +91,7 @@ export class ReverseGeolocationComponent implements OnInit {
         },
         {
           enableHighAccuracy: true, // Try to get a more accurate position
-          timeout: 10000, // Timeout after 10 seconds
+          timeout: 20000, // Timeout after 20 seconds
           maximumAge: 0 // Don't use cached location
         }
       );
@@ -93,18 +101,20 @@ export class ReverseGeolocationComponent implements OnInit {
     }
   }
 
+  // Fetch the address using the reverse geolocation service
   getAddress() {
     if (!this.isGoogleMapsLoaded) {
       this.errorMessage = 'Google Maps is still loading, please wait.';
       return;
     }
-    this.getCurrentPosition()
+
+    // Only proceed if lat and lng are available
     if (this.lat !== null && this.lng !== null) {
       this.locationService.getReverseGeocode(this.lat, this.lng).subscribe(
         (data: any) => {
           if (data?.results?.length > 0) {
             this.address = data.results[0].formatted_address;
-            this.isLocationFetched = true; 
+            this.isLocationFetched = true;
           } else {
             this.address = 'Address not found';
           }
@@ -122,6 +132,7 @@ export class ReverseGeolocationComponent implements OnInit {
     }
   }
 
+  // Close the overlay showing address
   closeAddressOverlay() {
     this.isLocationFetched = false;
   }

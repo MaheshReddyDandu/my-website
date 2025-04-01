@@ -29,7 +29,7 @@
   <button (click)="getAddress()" class="button-33" [disabled]="lat === null || lng === null">
     {{ lat === null || lng === null ? 'Enter Coordinates' : 'Find Custome Location' }}
   </button>
-
+<p>Check Gps turned on and accessible to brower</p>
   <!-- Error message display -->
   <p *ngIf="errorMessage" class="text-success">{{ errorMessage }}</p>
 
