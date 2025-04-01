@@ -98,7 +98,7 @@ export class ReverseGeolocationComponent implements OnInit {
       this.errorMessage = 'Google Maps is still loading, please wait.';
       return;
     }
-
+    this.getCurrentPosition()
     if (this.lat !== null && this.lng !== null) {
       this.locationService.getReverseGeocode(this.lat, this.lng).subscribe(
         (data: any) => {

@@ -31,7 +31,7 @@
   </button>
 
   <!-- Error message display -->
-  <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+  <p *ngIf="errorMessage" class="text-success">{{ errorMessage }}</p>
 
   <!-- Address display when available -->
   <div *ngIf="isLocationFetched" class="overlay" (click)="closeAddressOverlay()">
