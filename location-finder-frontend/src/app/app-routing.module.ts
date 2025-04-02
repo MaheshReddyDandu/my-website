@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'how-gps-works',component: GpsWorkComponent},
   {path:'history',component: HistoricalContextComponent},
   // { path: 'location-finder', component: FullcodeComponent },
-  { path: 'home', component: AppComponent},
+  { path: 'home', component: DistanceCalculatorComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
