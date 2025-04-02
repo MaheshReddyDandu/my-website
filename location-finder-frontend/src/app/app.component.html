@@ -22,12 +22,12 @@
     </div>
   </section>
 
-   <app-distance-calculator></app-distance-calculator>
+   <!-- <app-distance-calculator></app-distance-calculator> -->
   <div class="tool-container">
-    <!-- <ng-container *ngIf="distanceCalcLoaded"> -->
-      <!-- <app-distance-calculator></app-distance-calculator> -->
+    <ng-container *ngIf="distanceCalcLoaded">
+      <app-distance-calculator></app-distance-calculator>
       <!-- <app-reverse-geolocation></app-reverse-geolocation> -->
-    <!-- </ng-container> -->
+    </ng-container>
   </div>
 
   <section class="educational-content">
