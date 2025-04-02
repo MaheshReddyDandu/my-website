@@ -22,10 +22,12 @@
     </div>
   </section>
 
+   <app-distance-calculator></app-distance-calculator>
   <div class="tool-container">
-    <ng-container *ngIf="distanceCalcLoaded">
-      <app-distance-calculator></app-distance-calculator>
-    </ng-container>
+    <!-- <ng-container *ngIf="distanceCalcLoaded"> -->
+      <!-- <app-distance-calculator></app-distance-calculator> -->
+      <!-- <app-reverse-geolocation></app-reverse-geolocation> -->
+    <!-- </ng-container> -->
   </div>
 
   <section class="educational-content">
@@ -116,13 +118,7 @@
       </ul>
     </article>
   </section>
-  <nav class="info-links">
-    <h3>Learn More About GPS</h3>
-    <ul>
-      <li><a routerLink="/how-gps-works">How GPS Technology Works</a></li>
-      <li><a routerLink="/history">History of Navigation</a></li>
-    </ul>
-  </nav>
+
   <section class="faq-section">
     <h2>Frequently Asked Questions</h2>
     
@@ -195,5 +191,13 @@
       </div>
     </div>
   </section>
-  <router-outlet></router-outlet>
+ 
 </main>
+<nav class="info-links">
+  <h3>Learn More About GPS</h3>
+  <ul>
+    <li><a routerLink="/how-gps-works">How GPS Technology Works</a></li>
+    <li><a routerLink="/history">History of Navigation</a></li>
+  </ul>
+</nav>
+ <router-outlet></router-outlet>
