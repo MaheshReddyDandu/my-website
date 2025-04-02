@@ -1,5 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { LocationService } from '../../services/location.service';
+import { HttpParams } from '@angular/common/http';
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-reverse-geolocation',
@@ -134,6 +136,9 @@ export class ReverseGeolocationComponent implements OnInit {
 
   // Close the overlay showing address
   closeAddressOverlay() {
+    var ls: number[] =[1,2,3,4,5]
+    let vg = ls.map(n=>n *n)
     this.isLocationFetched = false;
   }
+
 }

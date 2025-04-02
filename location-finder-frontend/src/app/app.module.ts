@@ -11,13 +11,17 @@ import { AppComponent } from './app.component';
 import { DistanceCalculatorComponent } from './components/distance-calculator/distance-calculator.component';
 import { ReverseGeolocationComponent } from './components/reverse-geolocation/reverse-geolocation.component';
 import { FullcodeComponent } from './components/fullcode/fullcode.component';
+import { GpsWorkComponent } from './components/gps-work/gps-work.component';
+import { HistoricalContextComponent } from './components/historical-context/historical-context.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DistanceCalculatorComponent,
     ReverseGeolocationComponent,
-    FullcodeComponent
+    FullcodeComponent,
+    GpsWorkComponent,
+    HistoricalContextComponent
   ],
   imports: [
     BrowserModule,

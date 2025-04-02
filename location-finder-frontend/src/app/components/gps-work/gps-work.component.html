@@ -1,0 +1,70 @@
+<article class="gps-guide">
+    <h1>The Science Behind GPS Technology</h1>
+    
+    <section>
+      <h2>Satellite Constellation</h2>
+      <p>The Global Positioning System consists of 24 operational satellites orbiting Earth about 12,550 miles above us. These satellites are arranged in six orbital planes with four satellites in each, ensuring that at least four are visible from any point on Earth at any time.</p>
+      
+      <h3>Key Satellite Facts:</h3>
+      <ul>
+        <li>Orbital period: 11 hours 58 minutes</li>
+        <li>Speed: Approximately 8,700 mph (14,000 km/h)</li>
+        <li>Transmit on L1 (1575.42 MHz) and L2 (1227.60 MHz) frequencies</li>
+        <li>Each satellite has multiple atomic clocks (rubidium and cesium)</li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2>Trilateration: The Mathematical Magic</h2>
+      <p>GPS receivers determine position through trilateration - measuring distances from multiple satellites. Here's how it works:</p>
+      
+      <div class="step-by-step">
+        <div class="step">
+          <h4>Step 1: Signal Reception</h4>
+          <p>The receiver picks up signals from at least four satellites, each containing:</p>
+          <ul>
+            <li>Satellite's precise location (ephemeris data)</li>
+            <li>Exact time the signal was transmitted</li>
+            <li>System status information</li>
+          </ul>
+        </div>
+        
+        <div class="step">
+          <h4>Step 2: Distance Calculation</h4>
+          <p>The receiver calculates how far each satellite is by comparing the transmission time with reception time (speed of light × time delay = distance).</p>
+        </div>
+        
+        <div class="step">
+          <h4>Step 3: Position Determination</h4>
+          <p>Using the known satellite positions and measured distances, the receiver solves for the one point where all spheres (centered on each satellite with radius equal to distance) intersect - your location.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <h2>Factors Affecting GPS Accuracy</h2>
+      <p>While GPS is remarkably precise, several factors can impact accuracy:</p>
+      
+      <div class="accuracy-factors">
+        <div class="factor">
+          <h4>Atmospheric Effects</h4>
+          <p>Ionosphere and troposphere can slow signals, creating errors of 0-30 meters. Dual-frequency receivers can correct this.</p>
+        </div>
+        
+        <div class="factor">
+          <h4>Multipath Errors</h4>
+          <p>Signals bouncing off buildings or terrain create false readings, especially in urban areas.</p>
+        </div>
+        
+        <div class="factor">
+          <h4>Satellite Geometry</h4>
+          <p>Poor satellite distribution (all clustered in one part of sky) reduces accuracy.</p>
+        </div>
+        
+        <div class="factor">
+          <h4>Receiver Quality</h4>
+          <p>Consumer devices typically achieve 3-5 meter accuracy, while survey-grade units reach centimeter precision.</p>
+        </div>
+      </div>
+    </section>
+  </article>
